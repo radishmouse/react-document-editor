@@ -25,6 +25,7 @@ class App extends Component {
         </header>
         <DocumentList
           docs={this.state.docs}
+          clickHandler={this._setCurrentIndex}
         />
         <DocumentEditor
           document={this.state.docs[this.state.currentIndex]}
@@ -32,6 +33,14 @@ class App extends Component {
       </div>
     );
   }
+
+  _setCurrentIndex = (newIndex) => {
+    this.setState({
+      currentIndex: newIndex
+    }, () => {
+      console.log(`updated currentIndex to ${newIndex}`)
+    });
+  };
 }
 
 export default App;
