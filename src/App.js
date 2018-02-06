@@ -29,6 +29,7 @@ class App extends Component {
         />
         <DocumentEditor
           document={this.state.docs[this.state.currentIndex]}
+          handleChange={this._setDocumentContent}
         />
       </div>
     );
@@ -40,7 +41,27 @@ class App extends Component {
     }, () => {
       console.log(`updated currentIndex to ${newIndex}`)
     });
-  };
+  }
+
+  _setDocumentContent = (newContent) => {
+    console.log(newContent);
+    const updatedDocuments = this.state.docs.map((d, i) => {
+      if (i === this.state.currentIndex) {
+        return {
+          title: d.title,
+          content: newContent
+        }
+      } else {
+        return d;
+      }
+    });
+
+    this.setState({
+      docs: updatedDocuments
+    }, () => {
+      console.log(`updated document #${this.state.currentIndex}`);
+    });
+  }
 }
 
 export default App;

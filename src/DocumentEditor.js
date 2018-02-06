@@ -1,9 +1,14 @@
 import React from 'react';
 
 const DocumentEditor = (props)=> {
-  return (<div>
-    {props.document.content}
-  </div>);
+  return (
+    <textarea
+      value={props.document.content}
+      onChange={(event) => {
+        props.handleChange(event.target.value);
+      }}
+    />
+  );
 };
 
 export default DocumentEditor;
