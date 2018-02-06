@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import documents from './documents';
+import dummyDocuments from './documents';
 import DocumentList from './DocumentList';
 import DocumentEditor from './DocumentEditor';
 
@@ -11,7 +11,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      docs: documents.slice(),   // make a copy of the documents array
+      docs: this._loadDocs(),   // make a copy of the documents array
       currentIndex: 0
     }
   }
@@ -60,7 +60,20 @@ class App extends Component {
       docs: updatedDocuments
     }, () => {
       console.log(`updated document #${this.state.currentIndex}`);
+      this._saveDocs();
     });
+  }
+
+  _saveDocs = () => {
+    localStorage.setItem('react-docs/docs', JSON.stringify(this.state.docs));
+  }
+
+  _loadDocs = () => {
+    let docs = JSON.parse(localStorage.getItem('react-docs/docs'));
+    if (!docs) {
+      docs = dummyDocuments.slice()
+    }
+    return docs;
   }
 }
 
