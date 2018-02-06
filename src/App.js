@@ -4,13 +4,15 @@ import './App.css';
 
 import documents from './documents';
 import DocumentList from './DocumentList';
+import DocumentEditor from './DocumentEditor';
 
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      docs: documents.slice()   // make a copy of the documents array
+      docs: documents.slice(),   // make a copy of the documents array
+      currentIndex: 0
     }
   }
 
@@ -23,6 +25,9 @@ class App extends Component {
         </header>
         <DocumentList
           docs={this.state.docs}
+        />
+        <DocumentEditor
+          document={this.state.docs[this.state.currentIndex]}
         />
       </div>
     );
