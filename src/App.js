@@ -23,6 +23,11 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
+        <button
+          onClick={this._createNewDocument}
+        >
+          New Document
+        </button>
         <DocumentList
           docs={this.state.docs}
           clickHandler={this._setCurrentIndex}
@@ -33,6 +38,19 @@ class App extends Component {
         />
       </div>
     );
+  }
+
+  _createNewDocument = () => {
+    this.setState({
+      currentIndex: this.state.docs.length,
+      docs: [
+        ...this.state.docs,
+        {
+          title: 'new doc',
+          content: ''
+        }
+      ]
+    })
   }
 
   _setCurrentIndex = (newIndex) => {
